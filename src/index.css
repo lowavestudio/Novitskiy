@@ -1,0 +1,221 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Manrope:wght@300;400;500;600;700&display=swap');
+
+@import "tailwindcss";
+
+@theme {
+  --color-forest: #182421;
+  --color-charcoal: #252628;
+  --color-brass: #B59A6B;
+  --color-brass-light: #D4B882;
+  --color-ivory: #EAE2D3;
+  --color-soft-white: #F6F3EC;
+  --color-stone: #89867E;
+  --color-stone-light: #B5B2AA;
+
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'Manrope', system-ui, sans-serif;
+
+  --ease-cinematic: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-reveal: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-forest);
+  color: var(--color-ivory);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+::selection {
+  background-color: var(--color-brass);
+  color: var(--color-forest);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--color-charcoal); }
+::-webkit-scrollbar-thumb { background: var(--color-brass); border-radius: 2px; }
+
+/* Chapter nav indicator */
+.chapter-nav {
+  position: fixed;
+  right: 1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  align-items: flex-end;
+}
+
+.chapter-nav-dot {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  opacity: 0.4;
+  transition: opacity 0.3s ease;
+}
+
+.chapter-nav-dot:hover,
+.chapter-nav-dot.active {
+  opacity: 1;
+}
+
+.chapter-nav-dot-line {
+  width: 24px;
+  height: 1px;
+  background: var(--color-brass);
+  transition: width 0.3s ease;
+}
+
+.chapter-nav-dot.active .chapter-nav-dot-line {
+  width: 36px;
+}
+
+.chapter-nav-dot-label {
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-ivory);
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateX(8px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.chapter-nav-dot:hover .chapter-nav-dot-label,
+.chapter-nav-dot.active .chapter-nav-dot-label {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Fluid typography */
+h1 { font-size: clamp(2.8rem, 8vw, 7rem); }
+h2 { font-size: clamp(2rem, 5vw, 4.5rem); }
+h3 { font-size: clamp(1.5rem, 3.5vw, 3rem); }
+h4 { font-size: clamp(1.1rem, 2.5vw, 1.8rem); }
+
+/* Reveal animations */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.9s var(--ease-reveal), transform 0.9s var(--ease-reveal);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: opacity 0.9s var(--ease-reveal), transform 0.9s var(--ease-reveal);
+}
+.reveal-left.visible { opacity: 1; transform: translateX(0); }
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(40px);
+  transition: opacity 0.9s var(--ease-reveal), transform 0.9s var(--ease-reveal);
+}
+.reveal-right.visible { opacity: 1; transform: translateX(0); }
+
+/* Stagger children */
+.stagger > * { opacity: 0; transform: translateY(24px); transition: opacity 0.7s var(--ease-reveal), transform 0.7s var(--ease-reveal); }
+.stagger.visible > *:nth-child(1) { opacity: 1; transform: none; transition-delay: 0.05s; }
+.stagger.visible > *:nth-child(2) { opacity: 1; transform: none; transition-delay: 0.15s; }
+.stagger.visible > *:nth-child(3) { opacity: 1; transform: none; transition-delay: 0.25s; }
+.stagger.visible > *:nth-child(4) { opacity: 1; transform: none; transition-delay: 0.35s; }
+.stagger.visible > *:nth-child(5) { opacity: 1; transform: none; transition-delay: 0.45s; }
+
+/* Cinematic image scale on load */
+.img-cinematic {
+  animation: cinematicZoom 12s ease-in-out infinite alternate;
+}
+
+@keyframes cinematicZoom {
+  from { transform: scale(1); }
+  to { transform: scale(1.04); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+  .img-cinematic { animation: none; }
+}
+
+/* Divider */
+.brass-divider {
+  width: 60px;
+  height: 1px;
+  background: var(--color-brass);
+  margin: 1.5rem 0;
+}
+
+/* Audio player */
+.audio-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.9rem 1.8rem;
+  border: 1px solid var(--color-brass);
+  color: var(--color-brass);
+  background: transparent;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.audio-btn:hover {
+  background: var(--color-brass);
+  color: var(--color-forest);
+}
+
+/* Parallax wrapper */
+.parallax-img {
+  will-change: transform;
+}
+
+/* Chapter label */
+.chapter-label {
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--color-brass);
+  opacity: 0.8;
+}
+
+/* Quote marks */
+.quote-mark {
+  font-family: var(--font-display);
+  font-size: 6rem;
+  line-height: 0.5;
+  color: var(--color-brass);
+  opacity: 0.3;
+  user-select: none;
+}
