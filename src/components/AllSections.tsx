@@ -8,7 +8,7 @@ function MusicToggle() {
   const audioRef = useRef<HTMLAudioElement | null>(null)
 
   useEffect(() => {
-    audioRef.current = new Audio('/music.mp3')
+    audioRef.current = new Audio(`${import.meta.env.BASE_URL}music.mp3`)
     audioRef.current.loop = true
     audioRef.current.volume = 0.18
     return () => { audioRef.current?.pause() }

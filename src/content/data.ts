@@ -3,6 +3,10 @@
 // Все тексты, подписи и пути к медиафайлам — здесь
 // ============================================================
 
+// Vite deploys this project under /Novitskiy/ on GitHub Pages.
+// Public media paths must include the configured base URL.
+const media = (file: string) => `${import.meta.env.BASE_URL}${file.replace(/^\//, "")}`
+
 export const siteData = {
   // ── Общее ──────────────────────────────────────────────────
   name: 'Игорь Новицкий',
@@ -16,7 +20,7 @@ export const siteData = {
     subtitle: 'Человек, рядом с которым жизнь становится настоящим приключением',
     scrollHint: 'Листайте нашу историю',
     fromFamily: 'С любовью. От всей семьи.',
-    heroImage: '/igor-portrait.png',
+    heroImage: media('/igor-portrait.png'),
     heroImageAlt: 'Игорь Новицкий',
   },
 
@@ -31,7 +35,7 @@ export const siteData = {
       'Ты умеешь находить радость в простых вещах. В хорошем разговоре, в удачной рыбалке, в дружеской компании, в возможности быть рядом с теми, кто дорог.',
       'И именно таким мы тебя любим. Настоящим.',
     ],
-    image: '/igor-grill.png',
+    image: media('/igor-grill.png'),
     imageAlt: 'Игорь у мангала — настоящий характер',
   },
 
@@ -44,21 +48,21 @@ export const siteData = {
       {
         id: 'forest',
         label: 'Лес',
-        image: '/igor-forest-friends.png',
+        image: media('/igor-forest-friends.png'),
         imageAlt: 'Игорь с друзьями на природе',
         text: 'Есть особая свобода в том, чтобы оказаться вдали от городского шума. Там, где слышен ветер, пахнет лесом и время течёт совсем иначе.',
       },
       {
         id: 'water',
         label: 'Вода',
-        image: '/igor-fishing-sea.png',
+        image: media('/igor-fishing-sea.png'),
         imageAlt: 'Рыбалка на катере — горизонт и золотой закат',
         text: 'Есть люди, которым для счастья иногда нужны лишь вода, удочка и бесконечный горизонт.',
       },
       {
         id: 'winter',
         label: 'Зима',
-        image: '/igor-ice-fishing.png',
+        image: media('/igor-ice-fishing.png'),
         imageAlt: 'Зимняя рыбалка на рассвете',
         text: 'И даже когда вокруг только снег, лёд и мороз, ты всегда знаешь, ради чего стоит выйти навстречу новому дню.',
       },
@@ -72,17 +76,17 @@ export const siteData = {
     headline: 'С тобой хоть в горы. Хоть в небо. Хоть на край света',
     slides: [
       {
-        image: '/couple-skiing.png',
+        image: media('/couple-skiing.png'),
         imageAlt: 'Горнолыжное путешествие вместе',
         text: 'Мы с тобой поднимались в горы...',
       },
       {
-        image: '/couple-snowmobile.png',
+        image: media('/couple-snowmobile.png'),
         imageAlt: 'Снегоходная экспедиция',
         text: '...мчались по бескрайним снежным просторам...',
       },
       {
-        image: '/couple-rocks-sunset.png',
+        image: media('/couple-rocks-sunset.png'),
         imageAlt: 'Прогулка среди гранитных скал на закате',
         text: '...и встречали рассветы на вершинах.',
       },
@@ -96,7 +100,7 @@ export const siteData = {
     chapterLabel: 'V',
     chapterTitle: 'Четыре лапы и бесконечная любовь',
     headline: 'У любви иногда четыре лапы',
-    image: '/dogs.png',
+    image: media('/dogs.png'),
     imageAlt: 'Любимые собаки',
     text: [
       'Говорят, собаки особенно хорошо чувствуют людей.',
@@ -111,7 +115,7 @@ export const siteData = {
     chapterLabel: 'VI',
     chapterTitle: 'То, что дороже всего',
     headline: 'Самое главное всегда рядом',
-    image: '/family-dinner.png',
+    image: media('/family-dinner.png'),
     imageAlt: 'Семейный праздничный вечер',
     congratulation: [
       'Наш дорогой Игорь!',
@@ -130,9 +134,9 @@ export const siteData = {
   wifeMessage: {
     chapterLabel: 'VII',
     chapterTitle: 'А теперь я хочу сказать тебе самое главное...',
-    image: '/wedding-rings.png',
+    image: media('/wedding-rings.png'),
     imageAlt: 'Игорь и его любимая жена — день свадьбы',
-    couplePortrait: '/extra-portrait.png',
+    couplePortrait: media('/extra-portrait.png'),
     couplePortraitAlt: 'Вместе — студийный портрет',
     letter: [
       'Мой любимый Игорь!',
@@ -153,7 +157,7 @@ export const siteData = {
       'С днём рождения, мой родной.',
     ],
     // Путь к аудиофайлу (замените, когда аудио будет записано)
-    // Пример: audioFile: '/audio-message.mp3'
+    // Пример: audioFile: media('/audio-message.mp3') (после добавления файла)
     audioFile: null as string | null,
     audioButtonLabel: 'Послушай, что я хочу тебе сказать',
   },
@@ -163,7 +167,7 @@ export const siteData = {
     chapterLabel: 'VIII',
     chapterTitle: 'Наследие',
     headline: 'У каждого имени есть история',
-    coatOfArms: '/coat_of_arms.jpg',
+    coatOfArms: media('/coat_of_arms.jpg'),
     coatOfArmsAlt: 'Герб рода Новицких',
     text: [
       'Фамилия Новицкий имеет глубокие исторические корни.',
@@ -177,7 +181,7 @@ export const siteData = {
 
   // ── Финал ──────────────────────────────────────────────────
   finale: {
-    image: '/couple-bouquet.png',
+    image: media('/couple-bouquet.png'),
     imageAlt: 'Игорь и его любимая жена — торжественный портрет',
     headline: 'Игорь, самое лучшее в нашей жизни не позади.',
     headlineContinue: 'Оно продолжается.',
